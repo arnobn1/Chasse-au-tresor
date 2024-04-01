@@ -68,7 +68,6 @@ export class AdventurerBasic implements Adventurer {
     }
 
     private isObstacleForwrad(adventurers: Adventurer[], terrain: Map, x: number, y: number): boolean {
-        console.log("alors", adventurers.find(adventurer => adventurer.x === x && adventurer.y === y) ? true : false);
         return terrain.mountains.find(mountain => mountain.x === x && mountain.y === y) ||
             adventurers.find(adventurer => adventurer.x === x && adventurer.y === y) ||
             (x > terrain.width || y > terrain.height) || (x < 0 || y < 0) ? true : false;

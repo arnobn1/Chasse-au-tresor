@@ -21,7 +21,7 @@ describe('MapParserService', () => {
     it('#parseBasicMap Quand on choisit un fichier text avec une map, alors crée un objet Map avec ses caractéristiques', () => {
         // Given
         const input: string = 'C - 3 - 4\nM - 1 - 0\nM - 2 - 1\nT - 0 - 3 - 2\nT - 1 - 3 - 3\nA - Lara - 1 - 1 - S - AADADAGGA';
-        const adventurers = [new AdventurerBasic('Lara', 1, 1, 'S', ['A','A','D','A','D','A','G','G','A'], 0), new AdventurerBasic('Nono', 2, 2, 'E', ['A','A','D','A','D','A','G','G','A'], 0)];
+        const adventurers = [new AdventurerBasic('Lara', 1, 1, 'S', ['A', 'A', 'D', 'A', 'D', 'A', 'G', 'G', 'A'], 0), new AdventurerBasic('Nono', 2, 2, 'E', ['A', 'A', 'D', 'A', 'D', 'A', 'G', 'G', 'A'], 0)];
 
         // When
         const map = mapService.parseBasicMap(input, adventurers);
@@ -41,7 +41,8 @@ describe('MapParserService', () => {
         const adventurers = mapService.parseBasicAdventurers(input);
 
         // Then
-        const expectedAdventurers = [new AdventurerBasic('Lara', 1, 1, 'S', ['A','A','D','A','D','A','G','G','A'], 0), new AdventurerBasic('Nono', 2, 2, 'E', ['A','A','D','A','D','A','G','G','A'], 0)];
+        const expectedAdventurers = [new AdventurerBasic('Lara', 1, 1, 'S', ['A', 'A', 'D', 'A', 'D', 'A', 'G', 'G', 'A'], 0),
+        new AdventurerBasic('Nono', 2, 2, 'E', ['A', 'A', 'D', 'A', 'D', 'A', 'G', 'G', 'A'], 0)];
         expect(adventurers).toEqual(expectedAdventurers);
     });
 });

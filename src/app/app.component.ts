@@ -9,8 +9,9 @@ import { MapParserService } from '../service/map-parser.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  private input: string = '';
-  private output: string = '';
+  public input: string = '';
+  public output: string = '';
+  public static readonly OUTPUT_FILE_NAME = 'ResultHunt';
 
   constructor(
     private mapParserService: MapParserService,
@@ -24,7 +25,10 @@ export class AppComponent {
       this.simulate();
     };
     reader.readAsText(input.files![0]);
+    input.value = '';
   }
+
+
 
   private simulate(): void {
     const adventurers = this.mapParserService.parseBasicAdventurers(this.input);
@@ -43,17 +47,16 @@ export class AppComponent {
       this.output += `T - ${treasure.x} - ${treasure.y} - ${treasure.treasureNumber}\n`;
     });
     adventurers.forEach(adventurer => {
-      this.output += `A - ${adventurer.name} - ${adventurer.x} - ${adventurer.y} - ${adventurer.orientation} - ${adventurer.treasuresCollected}\n`;
+      this.output += `A - ${adventurer.name} - ${adventurer.x} - ${adventurer.y} - ${adventurer.orientation} - ${adventurer.treasuresCollected}`;
     });
-    //this.writeToFile(this.output);
+    this.writeToFile(this.output);
     console.log("output", this.output);
   }
 
-  private writeToFile(data: string): void {
+  private writeToFile(output: string): void {
     const huntFile = document.createElement('a');
-    const file = new Blob([data], { type: 'text/plain' });
-    huntFile.href = URL.createObjectURL(file);
-    huntFile.download = 'ResultHunt';
+    huntFile.href = URL.createObjectURL(new Blob([output], { type: 'text/plain' }));
+    huntFile.download = AppComponent.OUTPUT_FILE_NAME;
     huntFile.click();
   }
 }
