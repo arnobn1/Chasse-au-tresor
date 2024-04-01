@@ -1,4 +1,4 @@
-import { Obstacle } from "../interface/obstacle.interface"
+import { Obstacle } from "../interface/obstacle.interface";
 
 export class Mountain implements Obstacle {
     x: number;

@@ -5,7 +5,7 @@ import { Mountain } from "./mountain";
 export class MapBasic implements Map {
     width: number;
     height: number;
-    mountains: Mountain[]
+    mountains: Mountain[];
     treasures: Treasure[];
     turn: number;
 
@@ -20,7 +20,7 @@ export class MapBasic implements Map {
         this.height = height;
         this.mountains = mountains;
         this.treasures = treasures;
-        this.turn =  turn;
+        this.turn = turn;
     }
 
     public getRemainingTreasures(): Treasure[] {

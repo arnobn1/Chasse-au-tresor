@@ -161,10 +161,8 @@ describe('MapBasic', () => {
             adventurer.simulateMovements(adventurers, map, 0);
 
             // Then
-            expect(adventurer.x).toEqual(1);
-            expect(adventurer.y).toEqual(2);
-            expect(adventurer.treasuresCollected).toEqual(1);
+            expect(adventurer).toEqual(new AdventurerBasic('Nono', 1, 2, 'S', ['A'], 1));
             expect(map.treasures[0].treasureNumber).toEqual(1);
         });
     }
-})
+});

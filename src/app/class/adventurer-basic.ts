@@ -49,25 +49,25 @@ export class AdventurerBasic implements Adventurer {
     private moveForward(adventurers: Adventurer[], terrain: Map): void {
         switch (this.orientation) {
             case 'N':
-                this.isObstacleForwrad(adventurers, terrain, this.x, this.y - 1) ? null :
+                this.isObstacleForward(adventurers, terrain, this.x, this.y - 1) ? null :
                     this.y--;
                 break;
             case 'S':
-                this.isObstacleForwrad(adventurers, terrain, this.x, this.y + 1) ? null :
+                this.isObstacleForward(adventurers, terrain, this.x, this.y + 1) ? null :
                     this.y++;
                 break;
             case 'E':
-                this.isObstacleForwrad(adventurers, terrain, this.x + 1, this.y) ? null :
+                this.isObstacleForward(adventurers, terrain, this.x + 1, this.y) ? null :
                     this.x++;
                 break;
             case 'W':
-                this.isObstacleForwrad(adventurers, terrain, this.x - 1, this.y) ? null :
+                this.isObstacleForward(adventurers, terrain, this.x - 1, this.y) ? null :
                     this.x--;
                 break;
         }
     }
 
-    private isObstacleForwrad(adventurers: Adventurer[], terrain: Map, x: number, y: number): boolean {
+    private isObstacleForward(adventurers: Adventurer[], terrain: Map, x: number, y: number): boolean {
         return terrain.mountains.find(mountain => mountain.x === x && mountain.y === y) ||
             adventurers.find(adventurer => adventurer.x === x && adventurer.y === y) ||
             (x > terrain.width || y > terrain.height) || (x < 0 || y < 0) ? true : false;

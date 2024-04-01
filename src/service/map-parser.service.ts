@@ -12,20 +12,20 @@ import { TreasureBasic } from '../app/class/treasureBasic';
 })
 export class MapParserService {
 
-  public parseBasicMap(input: string, adventurers:  Adventurer[]): Map {
+  public parseBasicMap(input: string, adventurers: Adventurer[]): Map {
     const lines = input.split('\n');
     const mountains: Mountain[] = [];
     const treasures: TreasureBasic[] = [];
-    const turn = adventurers.reduce((nextAdventurer: Adventurer, adventurer: Adventurer) => adventurer.movements.length > nextAdventurer.movements.length ? adventurer : nextAdventurer, adventurers[0]);
-
+    const turnNumber = adventurers.reduce((nextAdventurer: Adventurer, adventurer: Adventurer) => adventurer.movements.length > nextAdventurer.movements.length ? adventurer : nextAdventurer, adventurers[0]);
     const mapSize = lines.filter((line) => line[0] === 'C');
+
     lines.filter((line) => line[0] === 'M').forEach((mountain: string) => {
       mountains.push({ x: Number(mountain.split(' ')[2]), y: Number(mountain.split(' ')[4]) });
     });
     lines.filter((line) => line[0] === 'T').forEach((treasure: string) => {
       treasures.push({ x: Number(treasure.split(' ')[2]), y: Number(treasure.split(' ')[4]), treasureNumber: Number(treasure.split(' ')[6]) });
     });
-    return new MapBasic(Number(mapSize[0].split(' ')[2]), Number(mapSize[0].split(' ')[4]), mountains, treasures, turn.movements.length);
+    return new MapBasic(Number(mapSize[0].split(' ')[2]), Number(mapSize[0].split(' ')[4]), mountains, treasures, turnNumber.movements.length);
   }
 
   public parseBasicAdventurers(input: string): Adventurer[] {

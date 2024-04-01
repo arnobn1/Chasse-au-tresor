@@ -11,6 +11,7 @@ import { MapParserService } from '../service/map-parser.service';
 export class AppComponent {
   public input: string = '';
   public output: string = '';
+  public downloadFile!: HTMLAnchorElement;
   public static readonly OUTPUT_FILE_NAME = 'ResultHunt';
 
   constructor(
@@ -27,8 +28,6 @@ export class AppComponent {
     reader.readAsText(input.files![0]);
     input.value = '';
   }
-
-
 
   private simulate(): void {
     const adventurers = this.mapParserService.parseBasicAdventurers(this.input);
@@ -50,13 +49,12 @@ export class AppComponent {
       this.output += `A - ${adventurer.name} - ${adventurer.x} - ${adventurer.y} - ${adventurer.orientation} - ${adventurer.treasuresCollected}`;
     });
     this.writeToFile(this.output);
-    console.log("output", this.output);
   }
 
   private writeToFile(output: string): void {
-    const huntFile = document.createElement('a');
-    huntFile.href = URL.createObjectURL(new Blob([output], { type: 'text/plain' }));
-    huntFile.download = AppComponent.OUTPUT_FILE_NAME;
-    huntFile.click();
+    this.downloadFile = document.createElement('a');
+    this.downloadFile.href = URL.createObjectURL(new Blob([output], { type: 'text/plain' }));
+    this.downloadFile.download = AppComponent.OUTPUT_FILE_NAME;
+    this.downloadFile.click();
   }
 }
